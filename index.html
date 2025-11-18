@@ -153,12 +153,34 @@
             border-bottom: none;
         }
 
+        /* ATUALIZAÇÃO: Rodapé centralizado */
         footer {
             text-align: center;
             padding: var(--space-md);
             border-top: 1px solid var(--border-color);
             color: var(--text-subtle);
         }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem; /* Espaço entre logo e texto */
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .footer-logo {
+            height: 50px;
+            width: auto;
+            opacity: 0.7;
+        }
+
+        footer p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        /* Fim da Atualização do Rodapé */
 
         .section-title {
             text-align: center;
@@ -377,7 +399,7 @@
             display: block;
         }
 
-        /* Lista de tarefas (Questionário) */
+        /* ATUALIZAÇÃO: Lista de tarefas (Questionário) */
         .task-list {
             list-style: none;
             padding-left: 0;
@@ -406,6 +428,7 @@
             background-color: transparent; /* Remove o fundo que cobria a borda */
             padding: 0;
         }
+        /* Fim da Atualização do Checklist */
 
         /* Classe auxiliar para listas sem ícone */
         .task-list.no-icon li {
@@ -491,9 +514,21 @@
             <h2 class="section-title fade-in">Plano de Ação Atualizado (Nov 25 - Mar 26)</h2>
 
             <div class="timeline-container">
-                <!-- Fase 1 -->
+                <!-- ATUALIZAÇÃO: Fase 1 Adicionada -->
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
+                        <span class="tag">Fase 1 (Imediata)</span>
+                        <h3>Consolidação do Business Plan</h3>
+                        <p><strong>Entregáveis:</strong> Questionário (Cléber) ➔ Respostas em Áudio (Marcell) ➔ Consolidação do Plano (Cléber/Luiz).</p>
+                        <p><strong>CRÍTICO:</strong> Levantamento de Custos (Budget 6-8 meses) para aprovação do Marcell.</p>
+                    </div>
+                </div>
+                <!-- Fim da Atualização -->
+
+                <!-- Fase 2 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <!-- ATUALIZAÇÃO: Data corrigida -->
                         <span class="tag">Fase 2 (Dez 25)</span>
                         <h3>Identidade e Legalização</h3>
                         <p><strong>Entregáveis:</strong> Validação de Naming (INPI) ➔ Contratação do Fábio (Marca/Sebrae) ➔ Registro da Marca ➔ Estruturação Jurídica (Contratos).</p>
@@ -539,21 +574,23 @@
 
                 <!-- Botões das Abas -->
                 <div class="tab-buttons">
+                    <!-- ATUALIZAÇÃO: Aba A adicionada e definida como ativa -->
                     <button class="tab-button active" onclick="openTab(event, 'tab-estrategia')">A. Estratégia</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-processos')">B. Processos</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-rh')">C. RH (Estrutura)</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-comercial')">D. Comercial (Dados)</button>
+                    <!-- ATUALIZAÇÃO: Aba E adicionada -->
                     <button class="tab-button" onclick="openTab(event, 'tab-melhoria')">E. Melhoria</button>
                 </div>
 
                 <!-- Conteúdo das Abas -->
                 
-                <!-- A. Estratégia -->
+                <!-- A. Estratégia (NOVO) -->
                 <div id="tab-estrategia" class="tab-content active">
                     <h3>A. Modelagem e Estratégia (Áudios)</h3>
                     <ul class="task-list">
                         <li>Qual é a sua "Visão de Futuro" para a Autocare? (Onde você quer estar em 1, 3, 5 anos)</li>
-                        <li>Quem é o cliente ideal (Segmento de Clientes) que você imagina para a Autocare?</li>
+                        <li>Quem é o cliente ideal (Segmento de Clientes) que você imagina for da Pneucar?</li>
                         <li>Qual o "problema" principal que a Autocare resolve para esse cliente? (Proposta de Valor)</li>
                     </ul>
                 </div>
@@ -589,7 +626,7 @@
                     </ul>
                 </div>
 
-                <!-- E. Melhoria -->
+                <!-- E. Melhoria (NOVO) -->
                 <div id="tab-melhoria" class="tab-content">
                     <h3>E. Melhoria Contínua e Conformidade (Áudios/Ações)</h3>
                     <ul class="task-list">
@@ -605,7 +642,7 @@
 
         <!-- 7. Seção Visão de Futuro (Re-adicionada) -->
         <section id="fases-futuras" class="container">
-            <h2 class="section-title fade-in">Visão de Futuro: Fases 2 e 3</h2>
+            <h2 class="section-title fade-in">Visão de Futuro: Fases 2 e 3 (Pneucar)</h2>
             <div class="card fade-in">
                 <h3 style="color: var(--text-primary);">Fase 2: Modelagem e Expansão (TO-BE)</h3>
                 <ul class="task-list no-icon" style="margin-top: 1rem;">
@@ -622,9 +659,13 @@
 
     </main>
 
-    <!-- 8. Rodapé -->
+    <!-- 8. Rodapé (ATUALIZADO) -->
     <footer>
-        <p>&copy; 2025 Ecossistema Live | Projeto Autocare</p>
+        <div class="footer-content container">
+            <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-34.png" alt="Logo Ecossistema Live" class="footer-logo">
+            <p>Ecossistema Live | Projeto Autocare</p>
+            <p>&copy; 2025 Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <script>
@@ -651,6 +692,10 @@
                     el.classList.add('is-visible');
                 });
             }
+
+            // ATUALIZAÇÃO: Garantir que a primeira aba esteja visível no carregamento
+            // (Se o 'active' já estiver no HTML, isso é uma redundância segura)
+            document.querySelector('.tab-content.active').style.display = 'block';
         });
 
         /* --- Script para Abas (Tabs) --- */
@@ -658,6 +703,7 @@
             let tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) {
                 tabContents[i].classList.remove("active");
+                tabContents[i].style.display = 'none'; // Garante que todos estão ocultos
             }
             
             let tabButtons = document.getElementsByClassName("tab-button");
@@ -666,6 +712,7 @@
             }
             
             document.getElementById(tabName).classList.add("active");
+            document.getElementById(tabName).style.display = 'block'; // Mostra o ativo
             event.currentTarget.classList.add("active");
         }
     </script>
