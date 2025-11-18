@@ -393,19 +393,27 @@
             font-size: 1.1rem;
             color: var(--text-muted);
             font-weight: 500;
+            padding-left: 3rem; /* Aumenta o padding para dar espaço ao ícone */
         }
 
         .task-list li::before {
             content: '🎙️'; /* Ícone de Áudio */
             position: absolute;
-            left: -15px;
+            left: 1rem; /* Posiciona o ícone dentro do padding */
             top: 50%;
             transform: translateY(-50%);
             font-size: 1.5rem;
-            background-color: var(--card-bg);
-            padding: 0 5px;
+            background-color: transparent; /* Remove o fundo que cobria a borda */
+            padding: 0;
         }
 
+        /* Classe auxiliar para listas sem ícone */
+        .task-list.no-icon li {
+            padding-left: 1.5rem;
+        }
+        .task-list.no-icon li::before {
+            content: none;
+        }
 
         /* Animação Fade-in */
         .fade-in {
@@ -448,7 +456,7 @@
                     <strong>Diagnóstico:</strong> O cronograma original (Ago/Set) está atrasado.
                 </p>
                 <p>
-                    <strong>Ação Imediata:</strong> Retomada ("não perder o embalo") com *kick-off* focado 100% no novo modelo de negócio ("Autocare"), que será financiado pela Pneucar (atual).
+                    <strong>Ação Imediata:</strong> Retomada ("não perder o embalo") com "kick-off" focado 100% no novo modelo de negócio ("Autocare"), que será financiado pela Pneucar (atual).
                 </p>
             </div>
         </section>
@@ -486,16 +494,7 @@
                 <!-- Fase 1 -->
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
-                        <span class="tag">Fase 1 (Imediata)</span>
-                        <h3>Consolidação do Business Plan</h3>
-                        <p><strong>Entregáveis:</strong> Questionário (Cléber) ➔ Respostas em Áudio (Marcell) ➔ Consolidação do Plano (Cléber/Luiz).</p>
-                        <p><strong>CRÍTICO:</strong> Levantamento de Custos (Budget 6-8 meses) para aprovação do Marcell.</p>
-                    </div>
-                </div>
-                <!-- Fase 2 -->
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <span class="tag">Fase 2 (Dez 25 - Jan 26)</span>
+                        <span class="tag">Fase 2 (Dez 25)</span>
                         <h3>Identidade e Legalização</h3>
                         <p><strong>Entregáveis:</strong> Validação de Naming (INPI) ➔ Contratação do Fábio (Marca/Sebrae) ➔ Registro da Marca ➔ Estruturação Jurídica (Contratos).</p>
                     </div>
@@ -540,15 +539,27 @@
 
                 <!-- Botões das Abas -->
                 <div class="tab-buttons">
-                    <button class="tab-button active" onclick="openTab(event, 'tab-processos')">B. Processos</button>
+                    <button class="tab-button active" onclick="openTab(event, 'tab-estrategia')">A. Estratégia</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-processos')">B. Processos</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-rh')">C. RH (Estrutura)</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-comercial')">D. Comercial (Dados)</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-melhoria')">E. Melhoria</button>
                 </div>
 
                 <!-- Conteúdo das Abas -->
                 
+                <!-- A. Estratégia -->
+                <div id="tab-estrategia" class="tab-content active">
+                    <h3>A. Modelagem e Estratégia (Áudios)</h3>
+                    <ul class="task-list">
+                        <li>Qual é a sua "Visão de Futuro" para a Autocare? (Onde você quer estar em 1, 3, 5 anos)</li>
+                        <li>Quem é o cliente ideal (Segmento de Clientes) que você imagina para a Autocare?</li>
+                        <li>Qual o "problema" principal que a Autocare resolve para esse cliente? (Proposta de Valor)</li>
+                    </ul>
+                </div>
+
                 <!-- B. Processos -->
-                <div id="tab-processos" class="tab-content active">
+                <div id="tab-processos" class="tab-content">
                     <h3>B. Mapeamento de Processos "As-Is" (Áudios)</h3>
                     <ul class="task-list">
                         <li>Detalhar a Jornada do Cliente (passo a passo, do primeiro contato à entrega).</li>
@@ -578,12 +589,40 @@
                     </ul>
                 </div>
 
+                <!-- E. Melhoria -->
+                <div id="tab-melhoria" class="tab-content">
+                    <h3>E. Melhoria Contínua e Conformidade (Áudios/Ações)</h3>
+                    <ul class="task-list">
+                        <li>(Áudio) Quais são os principais "gargalos" ou "incêndios" que você apaga hoje na Pneucar?</li>
+                        <li>(Áudio) Descreva os riscos trabalhistas que você enxerga hoje (Ex: Categoria MEI, etc).</li>
+                        <li>(Ação) Fazer cotação com Dr. Renato Leandro para análise de risco.</li>
+                        <li>(Ação) Definir quem será o responsável interno pelo "Programa 5S" na oficina.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. Seção Visão de Futuro (Re-adicionada) -->
+        <section id="fases-futuras" class="container">
+            <h2 class="section-title fade-in">Visão de Futuro: Fases 2 e 3</h2>
+            <div class="card fade-in">
+                <h3 style="color: var(--text-primary);">Fase 2: Modelagem e Expansão (TO-BE)</h3>
+                <ul class="task-list no-icon" style="margin-top: 1rem;">
+                    <li>Modelagem da nova linha de serviços "Autocare".</li>
+                    <li>Desligamento ou repactuação com os dois irmãos mecânicos (Ponto Crítico).</li>
+                    <li>Contratação de um vendedor para a Pneucar (para liberar o Marcell).</li>
+                </ul>
+                <h3 style="color: var(--text-primary); margin-top: var(--space-md);">Fase 3: Implementação e Crescimento</h3>
+                <ul class="task-list no-icon" style="margin-top: 1rem;">
+                    <li>Execução e lançamento da linha Autocare, conforme modelagem da Fase 2.</li>
+                </ul>
             </div>
         </section>
 
     </main>
 
-    <!-- 7. Rodapé -->
+    <!-- 8. Rodapé -->
     <footer>
         <p>&copy; 2025 Ecossistema Live | Projeto Autocare</p>
     </footer>
