@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Projeto - Autocare</title>
+    
+    <!-- Importação de Fontes (Guia de Estilo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. Núcleo da Identidade Visual (Tokens) --- */
+        :root {
+            /* Paleta Principal */
+            --primary-bg: #06192a;      /* Azul Petróleo - Fundo principal */
+            --card-bg: #0A243D;         /* Azul Escuro - Fundo de cards */
+            --accent-color: #00e800;     /* Verde Vibrante - Destaques, links, títulos */
+
+            /* Textos */
+            --text-primary: #ffffff;     /* Branco - Textos principais */
+            --text-muted: #cccccc;       /* Cinza Claro */
+            --text-subtle: #a0a0a0;       /* Cinza - Textos secundários e parágrafos */
+
+            /* Bordas e Efeitos */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-glow: 0 0 12px rgba(0, 232, 0, 0.7); /* Sombra para o verde vibrante */
+
+            /* Tipografia */
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+
+            /* Espaçamento */
+            --space-sm: 1rem;   /* 16px */
+            --space-md: 2rem;   /* 32px */
+            --space-lg: 4rem;   /* 64px */
+        }
+
+        /* --- 2. Estilos Globais e Textura de Fundo --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--primary-bg);
+            /* Textura de Fundo (Guia de Estilo) */
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+            color: var(--text-subtle);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            color: var(--text-primary);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.3;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 3rem); }
+        h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
+        h3 { font-size: 1.5rem; }
+
+        p {
+            margin-bottom: var(--space-sm);
+            max-width: 75ch; /* Limite de caracteres por linha (Guia de Estilo) */
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Acessibilidade: Foco Visível */
+        a:focus-visible, button:focus-visible, .card:focus-visible {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
+            box-shadow: var(--accent-glow);
+        }
+
+        /* --- 3. Estrutura e Layout --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: var(--space-lg);
+            padding-bottom: var(--space-lg);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(6, 25, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        main {
+            padding-top: 80px; /* Espaço para o header fixo */
+        }
+
+        section {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: var(--space-md);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-subtle);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+            box-shadow: var(--accent-glow);
+        }
+
+        /* Layout de Grid (Baseado no Guia de Estilo) */
+        .grid {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        @media (min-width: 768px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* --- 4. Componentes --- */
+
+        /* Card Padrão */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--space-md);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 232, 0, 0.3);
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Card de Diagnóstico (Guia de Estilo) */
+        .card-diagnostico {
+            font-family: var(--font-secondary);
+            border-left: 4px solid var(--accent-color);
+            background: linear-gradient(145deg, var(--card-bg), #082036);
+            box-shadow: var(--accent-glow);
+        }
+        
+        .card-diagnostico h2 {
+            font-family: var(--font-secondary);
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+        
+        .card-diagnostico p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Linha do Tempo Vertical (Guia de Estilo) */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-md) 0;
+        }
+
+        /* A linha vertical central */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            box-shadow: var(--accent-glow);
+            opacity: 0.5;
+        }
+
+        .timeline-item {
+            padding: var(--space-sm) var(--space-md);
+            position: relative;
+            width: 50%;
+        }
+
+        /* O círculo na linha */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--primary-bg);
+            border: 4px solid var(--accent-color);
+            top: 32px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Itens da Esquerda */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        /* Itens da Direita */
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: var(--space-sm);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .timeline-content:hover {
+            border-color: var(--accent-color);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent-color);
+        }
+        
+        .timeline-content .tag {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Ajuste Mobile para Timeline */
+        @media (max-width: 768px) {
+            .timeline-container::after {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 10px;
+                text-align: left;
+            }
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                text-align: left;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 50px;
+            }
+            .timeline-item::after, .timeline-item:nth-child(even)::after {
+                left: 10px;
+            }
+        }
+
+        /* Abas (Tabs) para o Questionário */
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--space-md);
+        }
+
+        .tab-button {
+            background-color: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-subtle);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Lista de tarefas (Questionário) */
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .task-list li {
+            position: relative;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            background-color: rgba(0, 232, 0, 0.05);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .task-list li::before {
+            content: '🎙️'; /* Ícone de Áudio */
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            background-color: var(--card-bg);
+            padding: 0 5px;
+        }
+
+
+        /* Animação Fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. Cabeçalho Fixo -->
+    <header>
+        <div class="header-content">
+            <a href="#hero" class="logo-container" aria-label="Voltar ao topo">
+                <!-- Logo de Proposta (Guia de Estilo) -->
+                <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-36.png" alt="Logo Ecossistema Live" class="logo-img">
+                <div class="logo-text">
+                    <h1>Autocare</h1>
+                    <p>Projeto de Lançamento (Pneucar)</p>
+                </div>
+            </a>
+            <!-- Futuro Nav: <nav>...</nav> -->
+        </div>
+    </header>
+
+    <main>
+
+        <!-- 2. Seção Hero e Status do Projeto -->
+        <section id="hero" class="container">
+            <div class="card card-diagnostico fade-in">
+                <h2>Status Report (17/11/2025)</h2>
+                <p>
+                    <strong>Diagnóstico:</strong> O cronograma original (Ago/Set) está atrasado.
+                </p>
+                <p>
+                    <strong>Ação Imediata:</strong> Retomada ("não perder o embalo") com *kick-off* focado 100% no novo modelo de negócio ("Autocare"), que será financiado pela Pneucar (atual).
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Seção Nova Governança -->
+        <section id="governanca" class="container">
+            <h2 class="section-title fade-in">Nova Governança do Projeto</h2>
+            <div class="grid grid-3">
+                <!-- Card Cléber -->
+                <div class="card fade-in" style="transition-delay: 100ms;">
+                    <h3>Cléber</h3>
+                    <p><strong>Papel:</strong> Gerente de Projeto (PMO)</p>
+                    <p><strong>Função:</strong> Figura central de execução, cobrança e gestão. Fará a ponte entre Marcell, Luiz e os fornecedores (Fábio, etc.).</p>
+                </div>
+                <!-- Card Marcell -->
+                <div class="card fade-in" style="transition-delay: 200ms;">
+                    <h3>Marcell</h3>
+                    <p><strong>Papel:</strong> Cliente / Conteudista</p>
+                    <p><strong>Função:</strong> Fornecer a "matéria-prima" (conhecimento do negócio) para destravar a Fase 1. O método de coleta será <strong>via Áudio</strong>.</p>
+                </div>
+                <!-- Card Luiz Portal -->
+                <div class="card fade-in" style="transition-delay: 300ms;">
+                    <h3>Luiz Portal</h3>
+                    <p><strong>Papel:</strong> Estrategista</p>
+                    <p><strong>Função:</strong> Foco em relacionamento, estratégia de alto nível e validação final do Business Plan. Não deve ser acionado para microgerenciamento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Seção Plano de Ação (Timeline) -->
+        <section id="plano-acao" class="container">
+            <h2 class="section-title fade-in">Plano de Ação Atualizado (Nov 25 - Mar 26)</h2>
+
+            <div class="timeline-container">
+                <!-- Fase 1 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <span class="tag">Fase 1 (Imediata)</span>
+                        <h3>Consolidação do Business Plan</h3>
+                        <p><strong>Entregáveis:</strong> Questionário (Cléber) ➔ Respostas em Áudio (Marcell) ➔ Consolidação do Plano (Cléber/Luiz).</p>
+                        <p><strong>CRÍTICO:</strong> Levantamento de Custos (Budget 6-8 meses) para aprovação do Marcell.</p>
+                    </div>
+                </div>
+                <!-- Fase 2 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <span class="tag">Fase 2 (Dez 25 - Jan 26)</span>
+                        <h3>Identidade e Legalização</h3>
+                        <p><strong>Entregáveis:</strong> Validação de Naming (INPI) ➔ Contratação do Fábio (Marca/Sebrae) ➔ Registro da Marca ➔ Estruturação Jurídica (Contratos).</p>
+                    </div>
+                </div>
+                <!-- Fase 3 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <span class="tag">Fase 3 (Jan - Fev 26)</span>
+                        <h3>Imagem e Pré-Lançamento</h3>
+                        <p><strong>Entregáveis:</strong> Consultoria de Imagem (Carol/Eric) ➔ Estrutura de Mkt Híbrida (Estagiário + Agência) ➔ Planejamento de Tráfego (Bruno Leão).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Seção Pontos de Atenção (Riscos) -->
+        <section id="riscos" class="container">
+            <h2 class="section-title fade-in">Pontos de Atenção (Red Flags)</h2>
+            <div class="grid grid-3">
+                <div class="card fade-in" style="transition-delay: 100ms;">
+                    <h3>Risco 1: Cash Flow</h3>
+                    <p>Marcell precisa de um orçamento claro (Budget) para aprovar os gastos da Autocare, já que o caixa virá da Pneucar.</p>
+                </div>
+                <div class="card fade-in" style="transition-delay: 200ms;">
+                    <h3>Risco 2: Validação de Marca</h3>
+                    <p>Não iniciar o design (Fábio) antes de validar a disponibilidade do nome no INPI. Evitar retrabalho.</p>
+                </div>
+                <div class="card fade-in" style="transition-delay: 300ms;">
+                    <h3>Risco 3: Fator Externo</h3>
+                    <p>A questão familiar (Terreno/Pai) é um ponto de pressão externa sobre o Marcell que pode afetar o foco e o caixa disponível.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Seção Checklist Marcell (O Questionário) -->
+        <section id="checklist-marcell" class="container">
+            <h2 class="section-title fade-in">Checklist de Pendências (Marcell)</h2>
+            <div class="card fade-in">
+                <p style="font-size: 1.1rem; color: var(--text-muted); text-align: center; margin-bottom: var(--space-md);">
+                    Marcell, para avançarmos para a Fase 2 (Identidade Visual), preciso que você grave áudios respondendo aos pontos abaixo. Não se preocupe com a ordem, apenas detalhe o máximo que puder.
+                </p>
+
+                <!-- Botões das Abas -->
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="openTab(event, 'tab-processos')">B. Processos</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-rh')">C. RH (Estrutura)</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-comercial')">D. Comercial (Dados)</button>
+                </div>
+
+                <!-- Conteúdo das Abas -->
+                
+                <!-- B. Processos -->
+                <div id="tab-processos" class="tab-content active">
+                    <h3>B. Mapeamento de Processos "As-Is" (Áudios)</h3>
+                    <ul class="task-list">
+                        <li>Detalhar a Jornada do Cliente (passo a passo, do primeiro contato à entrega).</li>
+                        <li>Descrever as Rotinas do(s) Mecânico(s) (o que fazem no dia a dia).</li>
+                        <li>Descrever as suas Rotinas de Gestor (o que você faz hoje).</li>
+                        <li>Listar o Portfólio de Serviços atual.</li>
+                        <li>Definir o Escopo de Veículos atendidos (quais marcas, anos, etc.).</li>
+                    </ul>
+                </div>
+                
+                <!-- C. RH -->
+                <div id="tab-rh" class="tab-content">
+                    <h3>C. Estrutura Organizacional (Áudios)</h3>
+                    <ul class="task-list">
+                        <li>Descrever a estrutura atual (quem é quem, quem responde a quem).</li>
+                        <li>Detalhar as funções de cada membro da equipe (o que cada um faz).</li>
+                    </ul>
+                </div>
+
+                <!-- D. Comercial -->
+                <div id="tab-comercial" class="tab-content">
+                    <h3>D. Análise Comercial (Extração de Dados)</h3>
+                    <p>Estes são relatórios que precisamos que você extraia do sistema e nos envie.</p>
+                    <ul class="task-list">
+                        <li>Extrair: Relatório/Tabela de Preços (Produtos).</li>
+                        <li>Extrair: Relatório Curva ABC (Produtos e Serviços).</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 7. Rodapé -->
+    <footer>
+        <p>&copy; 2025 Ecossistema Live | Projeto Autocare</p>
+    </footer>
+
+    <script>
+        /* --- Script para Animação Fade-in (Guia de Estilo) --- */
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeInElements = document.querySelectorAll('.fade-in');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback para navegadores antigos
+                fadeInElements.forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }
+        });
+
+        /* --- Script para Abas (Tabs) --- */
+        function openTab(event, tabName) {
+            let tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            let tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
