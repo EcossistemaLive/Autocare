@@ -428,6 +428,11 @@
             background-color: transparent; /* Remove o fundo que cobria a borda */
             padding: 0;
         }
+
+        /* NOVO: Ícone de Planilha */
+        .task-list li.icon-planilha::before {
+            content: '📊'; /* Ícone de Planilha/Gráfico */
+        }
         /* Fim da Atualização do Checklist */
 
         /* Classe auxiliar para listas sem ícone */
@@ -621,8 +626,9 @@
                     <h3>D. Análise Comercial (Extração de Dados)</h3>
                     <p>Estes são relatórios que precisamos que você extraia do sistema e nos envie.</p>
                     <ul class="task-list">
-                        <li>Extrair: Relatório/Tabela de Preços (Produtos).</li>
-                        <li>Extrair: Relatório Curva ABC (Produtos e Serviços).</li>
+                        <!-- ATUALIZAÇÃO: Classe de ícone adicionada -->
+                        <li class="icon-planilha">Extrair: Relatório/Tabela de Preços (Produtos).</li>
+                        <li class="icon-planilha">Extrair: Relatório Curva ABC (Produtos e Serviços).</li>
                     </ul>
                 </div>
 
