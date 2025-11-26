@@ -8,7 +8,7 @@
     <!-- Importação de Fontes (Guia de Estilo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. Núcleo da Identidade Visual (Tokens) --- */
@@ -124,9 +124,8 @@
         }
 
         .logo-img {
-            height: 50px; /* Aumentado de 40px */
+            height: 50px;
             width: auto;
-            /* Se a imagem falhar, não mostra borda quebrada */
             object-fit: contain;
         }
 
@@ -144,7 +143,7 @@
         }
 
         main {
-            padding-top: 80px; /* Espaço para o header fixo */
+            padding-top: 80px;
         }
 
         section {
@@ -155,7 +154,7 @@
             border-bottom: none;
         }
 
-        /* ATUALIZAÇÃO: Rodapé centralizado */
+        /* Rodapé */
         footer {
             text-align: center;
             padding: var(--space-md);
@@ -167,13 +166,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem; /* Espaço entre logo e texto */
+            gap: 0.5rem;
             padding-top: 0;
             padding-bottom: 0;
         }
         
         .footer-logo {
-            height: 60px; /* Aumentado de 50px */
+            height: 60px;
             width: auto;
             opacity: 0.7;
         }
@@ -182,7 +181,6 @@
             margin-bottom: 0;
             font-size: 0.9rem;
         }
-        /* Fim da Atualização do Rodapé */
 
         .section-title {
             text-align: center;
@@ -200,7 +198,6 @@
             box-shadow: var(--accent-glow);
         }
 
-        /* Layout de Grid (Baseado no Guia de Estilo) */
         .grid {
             display: grid;
             gap: var(--space-md);
@@ -214,7 +211,6 @@
 
         /* --- 4. Componentes --- */
 
-        /* Card Padrão */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -235,7 +231,6 @@
             margin-bottom: var(--space-sm);
         }
 
-        /* Card de Diagnóstico (Guia de Estilo) */
         .card-diagnostico {
             font-family: var(--font-secondary);
             border-left: 4px solid var(--accent-color);
@@ -255,7 +250,7 @@
             font-style: italic;
         }
 
-        /* Linha do Tempo Vertical (Guia de Estilo) */
+        /* Timeline */
         .timeline-container {
             position: relative;
             max-width: 1000px;
@@ -263,7 +258,6 @@
             padding: var(--space-md) 0;
         }
 
-        /* A linha vertical central */
         .timeline-container::after {
             content: '';
             position: absolute;
@@ -283,7 +277,6 @@
             width: 50%;
         }
 
-        /* O círculo na linha */
         .timeline-item::after {
             content: '';
             position: absolute;
@@ -297,14 +290,12 @@
             z-index: 1;
         }
 
-        /* Itens da Esquerda */
         .timeline-item:nth-child(odd) {
             left: 0;
             padding-right: 40px;
             text-align: right;
         }
 
-        /* Itens da Direita */
         .timeline-item:nth-child(even) {
             left: 50%;
             padding-left: 40px;
@@ -340,31 +331,34 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Ajuste Mobile para Timeline */
-        @media (max-width: 768px) {
-            .timeline-container::after {
-                left: 20px;
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 50px;
-                padding-right: 10px;
-                text-align: left;
-            }
-            .timeline-item:nth-child(odd) {
-                left: 0;
-                text-align: left;
-            }
-            .timeline-item:nth-child(even) {
-                left: 0;
-                padding-left: 50px;
-            }
-            .timeline-item::after, .timeline-item:nth-child(even)::after {
-                left: 10px;
-            }
+        /* Botão de Link dentro da Timeline */
+        .btn-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .btn-link:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            text-decoration: none;
         }
 
-        /* Abas (Tabs) para o Questionário */
+        @media (max-width: 768px) {
+            .timeline-container::after { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; text-align: left; }
+            .timeline-item:nth-child(odd) { left: 0; text-align: left; }
+            .timeline-item:nth-child(even) { left: 0; padding-left: 50px; }
+            .timeline-item::after, .timeline-item:nth-child(even)::after { left: 10px; }
+        }
+
+        /* Abas (Tabs) */
         .tab-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -384,28 +378,18 @@
             transition: all 0.3s ease;
         }
 
-        .tab-button:hover {
-            color: var(--text-primary);
-        }
+        .tab-button:hover { color: var(--text-primary); }
 
         .tab-button.active {
             color: var(--accent-color);
             border-bottom-color: var(--accent-color);
         }
 
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        /* ATUALIZAÇÃO: Lista de tarefas (Questionário) */
-        .task-list {
-            list-style: none;
-            padding-left: 0;
-        }
+        /* Lista de tarefas */
+        .task-list { list-style: none; padding-left: 0; }
 
         .task-list li {
             position: relative;
@@ -417,33 +401,25 @@
             font-size: 1.1rem;
             color: var(--text-muted);
             font-weight: 500;
-            padding-left: 3rem; /* Aumenta o padding para dar espaço ao ícone */
+            padding-left: 3rem;
         }
 
         .task-list li::before {
-            content: '🎙️'; /* Ícone de Áudio */
+            content: '🎙️';
             position: absolute;
-            left: 1rem; /* Posiciona o ícone dentro do padding */
+            left: 1rem;
             top: 50%;
             transform: translateY(-50%);
             font-size: 1.5rem;
-            background-color: transparent; /* Remove o fundo que cobria a borda */
+            background-color: transparent;
             padding: 0;
         }
 
-        /* NOVO: Ícone de Planilha */
-        .task-list li.icon-planilha::before {
-            content: '📊'; /* Ícone de Planilha/Gráfico */
-        }
-        /* Fim da Atualização do Checklist */
+        .task-list li.icon-planilha::before { content: '📊'; }
+        .task-list li.icon-acao::before { content: '⚡'; }
 
-        /* Classe auxiliar para listas sem ícone */
-        .task-list.no-icon li {
-            padding-left: 1.5rem;
-        }
-        .task-list.no-icon li::before {
-            content: none;
-        }
+        .task-list.no-icon li { padding-left: 1.5rem; }
+        .task-list.no-icon li::before { content: none; }
 
         /* Animação Fade-in */
         .fade-in {
@@ -465,7 +441,6 @@
     <header>
         <div class="header-content">
             <a href="#hero" class="logo-container" aria-label="Voltar ao topo">
-                <!-- LOGO ATUALIZADA NO HEADER -->
                 <img 
                     src="https://github.com/EcossistemaLive/Dashboard_goianita/blob/main/Logo%20Live-26.png?raw=true" 
                     alt="Logo Autocare" 
@@ -477,7 +452,6 @@
                     <p>Projeto de Lançamento (Pneucar)</p>
                 </div>
             </a>
-            <!-- Futuro Nav: <nav>...</nav> -->
         </div>
     </header>
 
@@ -486,12 +460,12 @@
         <!-- 2. Seção Hero e Status do Projeto -->
         <section id="hero" class="container">
             <div class="card card-diagnostico fade-in">
-                <h2>Status Report (17/11/2025)</h2>
+                <h2>Status Report (25/11/2025)</h2>
                 <p>
-                    <strong>Diagnóstico:</strong> O cronograma original (Ago/Set) está atrasado.
+                    <strong>Diagnóstico:</strong> Crise de mão de obra iminente (saída da equipe atual na próxima semana) e alto custo para contratação tradicional.
                 </p>
                 <p>
-                    <strong>Ação Imediata:</strong> Retomada ("não perder o embalo") com "kick-off" focado 100% no novo modelo de negócio ("Autocare"), que será financiado pela Pneucar (atual).
+                    <strong>Ação Imediata (PIVÔ TÁTICO):</strong> Implementação da "Escola de Mecânica Pneucar". Em vez de pagar para recrutar, cobraremos para ensinar (R$ 500,00/aluno) em um processo seletivo invertido de 4 meses. O objetivo é formar 5-7 alunos para contratar os 2 melhores.
                 </p>
             </div>
         </section>
@@ -500,23 +474,20 @@
         <section id="governanca" class="container">
             <h2 class="section-title fade-in">Nova Governança do Projeto</h2>
             <div class="grid grid-3">
-                <!-- Card Cléber -->
                 <div class="card fade-in" style="transition-delay: 100ms;">
                     <h3>Cléber</h3>
                     <p><strong>Papel:</strong> Gerente de Projeto (PMO)</p>
-                    <p><strong>Função:</strong> Figura central de execução, cobrança e gestão. Fará a ponte entre Marcell, Luiz e os fornecedores (Fábio, etc.).</p>
+                    <p><strong>Função:</strong> Figura central de execução. Foco imediato em colocar a "Escola Pneucar" de pé (Landing Page e Contratos) para ontem.</p>
                 </div>
-                <!-- Card Marcell -->
                 <div class="card fade-in" style="transition-delay: 200ms;">
                     <h3>Marcell</h3>
-                    <p><strong>Papel:</strong> Cliente / Conteudista</p>
-                    <p><strong>Função:</strong> Fornecer a "matéria-prima" (conhecimento do negócio) para destravar a Fase 1. O método de coleta será <strong>via Áudio</strong>.</p>
+                    <p><strong>Papel:</strong> Instrutor / Mentor</p>
+                    <p><strong>Função:</strong> Ministrar as aulas práticas e supervisionar os alunos na operação diária ("Mão de obra assistida").</p>
                 </div>
-                <!-- Card Luiz Portal -->
                 <div class="card fade-in" style="transition-delay: 300ms;">
                     <h3>Luiz Portal</h3>
                     <p><strong>Papel:</strong> Estrategista</p>
-                    <p><strong>Função:</strong> Foco em relacionamento, estratégia de alto nível e validação final do Business Plan. Não deve ser acionado para microgerenciamento.</p>
+                    <p><strong>Função:</strong> Definiu o modelo de negócio "Escola" para financiar a operação e resolver o RH.</p>
                 </div>
             </div>
         </section>
@@ -526,32 +497,30 @@
             <h2 class="section-title fade-in">Plano de Ação Atualizado (Nov 25 - Mar 26)</h2>
 
             <div class="timeline-container">
-                <!-- ATUALIZAÇÃO: Fase 1 Adicionada -->
+                <!-- ATUALIZAÇÃO: Fase 1.5 Adicionada -->
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
-                        <span class="tag">Fase 1 (Imediata)</span>
-                        <h3>Consolidação do Business Plan</h3>
-                        <p><strong>Entregáveis:</strong> Questionário (Cléber) ➔ Respostas em Áudio (Marcell) ➔ Consolidação do Plano (Cléber/Luiz).</p>
-                        <p><strong>CRÍTICO:</strong> Levantamento de Custos (Budget 6-8 meses) para aprovação do Marcell.</p>
+                        <span class="tag">Fase 1.5 (Imediata - Nov 25)</span>
+                        <h3>Escola Pneucar (MVP)</h3>
+                        <p><strong>Objetivo:</strong> Resolver falta de equipe e gerar caixa.</p>
+                        <p><strong>Ações:</strong> Validação Jurídica ➔ Landing Page ➔ Tráfego Local ➔ Seleção de 7 alunos.</p>
+                        <a href="https://ecossistemalive.github.io/inscricao_escola_mecanicos/index.html" target="_blank" class="btn-link">Visualizar Landing Page da Escola 🔗</a>
                     </div>
                 </div>
-                <!-- Fim da Atualização -->
 
-                <!-- Fase 2 -->
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
-                        <!-- ATUALIZAÇÃO: Data corrigida -->
+                        <span class="tag">Fase 1 (Em Paralelo)</span>
+                        <h3>Consolidação do Business Plan</h3>
+                        <p><strong>Entregáveis:</strong> Questionário de Processos (Marcell) ➔ Levantamento de Custos para aprovação do Budget.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
                         <span class="tag">Fase 2 (Dez 25)</span>
                         <h3>Identidade e Legalização</h3>
-                        <p><strong>Entregáveis:</strong> Validação de Naming (INPI) ➔ Contratação do Fábio (Marca/Sebrae) ➔ Registro da Marca ➔ Estruturação Jurídica (Contratos).</p>
-                    </div>
-                </div>
-                <!-- Fase 3 -->
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <span class="tag">Fase 3 (Jan - Fev 26)</span>
-                        <h3>Imagem e Pré-Lançamento</h3>
-                        <p><strong>Entregáveis:</strong> Consultoria de Imagem (Carol/Eric) ➔ Estrutura de Mkt Híbrida (Estagiário + Agência) ➔ Planejamento de Tráfego (Bruno Leão).</p>
+                        <p><strong>Entregáveis:</strong> Validação de Naming (INPI) ➔ Contratação do Fábio (Marca/Sebrae) ➔ Registro da Marca.</p>
                     </div>
                 </div>
             </div>
@@ -562,120 +531,92 @@
             <h2 class="section-title fade-in">Pontos de Atenção (Red Flags)</h2>
             <div class="grid grid-3">
                 <div class="card fade-in" style="transition-delay: 100ms;">
-                    <h3>Risco 1: Cash Flow</h3>
-                    <p>Marcell precisa de um orçamento claro (Budget) para aprovar os gastos da Autocare, já que o caixa virá da Pneucar.</p>
+                    <h3>Risco 1: Jurídico/Trabalhista</h3>
+                    <p><strong>ALERTA MÁXIMO:</strong> Ter alunos trabalhando exige "Contrato de Curso Livre" robusto, com cláusula de estágio prático não remunerado.</p>
                 </div>
                 <div class="card fade-in" style="transition-delay: 200ms;">
-                    <h3>Risco 2: Validação de Marca</h3>
-                    <p>Não iniciar o design (Fábio) antes de validar a disponibilidade do nome no INPI. Evitar retrabalho.</p>
+                    <h3>Risco 2: Saída da Equipe</h3>
+                    <p>A equipe atual não cumprirá aviso prévio. Marcell ficará sozinho na próxima semana se a Escola não começar já.</p>
                 </div>
                 <div class="card fade-in" style="transition-delay: 300ms;">
-                    <h3>Risco 3: Fator Externo</h3>
-                    <p>A questão familiar (Terreno/Pai) é um ponto de pressão externa sobre o Marcell que pode afetar o foco e o caixa disponível.</p>
+                    <h3>Risco 3: Cash Flow</h3>
+                    <p>A receita dos alunos (5 a 7 x R$ 500) deve custear o Tráfego e Materiais. Não pode ser misturada com o caixa.</p>
                 </div>
             </div>
         </section>
 
         <!-- 6. Seção Checklist Marcell (O Questionário) -->
         <section id="checklist-marcell" class="container">
-            <h2 class="section-title fade-in">Checklist de Pendências (Marcell)</h2>
+            <h2 class="section-title fade-in">Painel de Ação (Marcell)</h2>
             <div class="card fade-in">
                 <p style="font-size: 1.1rem; color: var(--text-muted); text-align: center; margin-bottom: var(--space-md);">
-                    Marcell, para avançarmos para a Fase 2 (Identidade Visual), preciso que você grave áudios respondendo aos pontos abaixo. Não se preocupe com a ordem, apenas detalhe o máximo que puder.
+                    Marcell, reorganizamos suas prioridades. A aba <strong>"A. Escola Pneucar"</strong> contém a estrutura do curso baseada na descrição de vaga.
                 </p>
 
-                <!-- Botões das Abas -->
                 <div class="tab-buttons">
-                    <!-- ATUALIZAÇÃO: Aba A adicionada e definida como ativa -->
-                    <button class="tab-button active" onclick="openTab(event, 'tab-estrategia')">A. Estratégia</button>
-                    <button class="tab-button" onclick="openTab(event, 'tab-processos')">B. Processos</button>
-                    <button class="tab-button" onclick="openTab(event, 'tab-rh')">C. RH (Estrutura)</button>
-                    <button class="tab-button" onclick="openTab(event, 'tab-comercial')">D. Comercial (Dados)</button>
-                    <!-- ATUALIZAÇÃO: Aba E adicionada -->
+                    <button class="tab-button active" onclick="openTab(event, 'tab-escola')">A. Escola Pneucar</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-estrategia')">B. Estratégia</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-processos')">C. Processos</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-rh')">D. RH (Estrutura)</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-melhoria')">E. Melhoria</button>
                 </div>
 
                 <!-- Conteúdo das Abas -->
                 
-                <!-- A. Estratégia (NOVO) -->
-                <div id="tab-estrategia" class="tab-content active">
-                    <h3>A. Modelagem e Estratégia (Áudios)</h3>
+                <div id="tab-escola" class="tab-content active">
+                    <h3>A. Estrutura do Curso (Módulos Baseados na Vaga)</h3>
+                    <p>Transformamos os requisitos da sua vaga na "Ementa do Curso".</p>
                     <ul class="task-list">
-                        <li>Qual é a sua "Visão de Futuro" para a Autocare? (Onde você quer estar em 1, 3, 5 anos)</li>
-                        <li>Quem é o cliente ideal (Segmento de Clientes) que você imagina para a Pneucar?</li>
-                        <li>Qual o "problema" principal que a Autocare resolve para esse cliente? (Proposta de Valor)</li>
+                        <li class="icon-acao"><strong>Módulo 1: Cultura & 5S (Semana 1)</strong><br>Ensino de organização, limpeza do ambiente e proatividade. Filtro inicial.</li>
+                        <li class="icon-acao"><strong>Módulo 2: Manutenção Preventiva (Mês 1)</strong><br>Troca de óleo, filtros, revisão básica. Alunos começam a auxiliar imediatamente.</li>
+                        <li class="icon-acao"><strong>Módulo 3: Ferramental & Metrologia (Mês 2)</strong><br>Manuseio de ferramentas de ajuste fino e noções de informática básica.</li>
+                        <li class="icon-acao"><strong>Módulo 4: Diagnóstico Avançado (Mês 3-4)</strong><br>Uso de Scanner, Osciloscópio (diferencial) e Teste de Rodagem.</li>
                     </ul>
                 </div>
 
-                <!-- B. Processos -->
-                <div id="tab-processos" class="tab-content">
-                    <h3>B. Mapeamento de Processos "As-Is" (Áudios)</h3>
+                <div id="tab-estrategia" class="tab-content">
+                    <h3>B. Modelagem e Estratégia (Áudios)</h3>
                     <ul class="task-list">
-                        <li>Detalhar a Jornada do Cliente (passo a passo, do primeiro contato à entrega).</li>
-                        <li>Descrever as Rotinas do(s) Mecânico(s) (o que fazem no dia a dia).</li>
-                        <li>Descrever as suas Rotinas de Gestor (o que você faz hoje).</li>
+                        <li>Qual é a sua "Visão de Futuro" para a Autocare?</li>
+                        <li>Quem é o cliente ideal (Segmento de Clientes)?</li>
+                        <li>Qual o "problema" principal que a Autocare resolve?</li>
+                    </ul>
+                </div>
+
+                <div id="tab-processos" class="tab-content">
+                    <h3>C. Mapeamento de Processos "As-Is" (Áudios)</h3>
+                    <ul class="task-list">
+                        <li>Detalhar a Jornada do Cliente (passo a passo).</li>
+                        <li>Descrever as Rotinas do(s) Mecânico(s).</li>
                         <li>Listar o Portfólio de Serviços atual.</li>
-                        <li>Definir o Escopo de Veículos atendidos (quais marcas, anos, etc.).</li>
                     </ul>
                 </div>
                 
-                <!-- C. RH -->
                 <div id="tab-rh" class="tab-content">
-                    <h3>C. Estrutura Organizacional (Áudios)</h3>
+                    <h3>D. Estrutura Organizacional (Áudios)</h3>
                     <ul class="task-list">
-                        <li>Descrever a estrutura atual (quem é quem, quem responde a quem).</li>
-                        <li>Detalhar as funções de cada membro da equipe (o que cada um faz).</li>
+                        <li>Descrever a estrutura atual (quem é quem).</li>
+                        <li>Detalhar as funções de cada membro da equipe.</li>
                     </ul>
                 </div>
 
-                <!-- D. Comercial -->
-                <div id="tab-comercial" class="tab-content">
-                    <h3>D. Análise Comercial (Extração de Dados)</h3>
-                    <p>Estes são relatórios que precisamos que você extraia do sistema e nos envie.</p>
-                    <ul class="task-list">
-                        <!-- ATUALIZAÇÃO: Classe de ícone adicionada -->
-                        <li class="icon-planilha">Extrair: Relatório/Tabela de Preços (Produtos).</li>
-                        <li class="icon-planilha">Extrair: Relatório Curva ABC (Produtos e Serviços).</li>
-                    </ul>
-                </div>
-
-                <!-- E. Melhoria (NOVO) -->
                 <div id="tab-melhoria" class="tab-content">
-                    <h3>E. Melhoria Contínua e Conformidade (Áudios/Ações)</h3>
+                    <h3>E. Melhoria Contínua e Conformidade</h3>
                     <ul class="task-list">
-                        <li>(Áudio) Quais são os principais "gargalos" ou "incêndios" que você apaga hoje na Pneucar?</li>
-                        <li>(Áudio) Descreva os riscos trabalhistas que você enxerga hoje (Ex: Categoria MEI, etc).</li>
-                        <li>(Ação) Fazer cotação com Dr. Renato Leandro para análise de risco.</li>
-                        <li>(Ação) Definir quem será o responsável interno pelo "Programa 5S" na oficina.</li>
+                        <li class="icon-acao"><strong>URGENTE:</strong> Validar minuta de contrato "Curso Livre" com Dr. Renato Leandro.</li>
+                        <li>(Áudio) Descreva os riscos trabalhistas que você enxerga hoje.</li>
+                        <li>(Ação) Definir responsável interno pelo "Programa 5S" (aluno destaque).</li>
                     </ul>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- 7. Seção Visão de Futuro (Re-adicionada) -->
-        <section id="fases-futuras" class="container">
-            <h2 class="section-title fade-in">Visão de Futuro: Fases 2 e 3 (Pneucar)</h2>
-            <div class="card fade-in">
-                <h3 style="color: var(--text-primary);">Fase 2: Modelagem e Expansão (TO-BE)</h3>
-                <ul class="task-list no-icon" style="margin-top: 1rem;">
-                    <li>Modelagem da nova linha de serviços "Autocare".</li>
-                    <li>Desligamento ou repactuação com os dois irmãos mecânicos (Ponto Crítico).</li>
-                    <li>Contratação de um vendedor para a Pneucar (para liberar o Marcell).</li>
-                </ul>
-                <h3 style="color: var(--text-primary); margin-top: var(--space-md);">Fase 3: Implementação e Crescimento</h3>
-                <ul class="task-list no-icon" style="margin-top: 1rem;">
-                    <li>Execução e lançamento da linha Autocare, conforme modelagem da Fase 2.</li>
-                </ul>
             </div>
         </section>
 
     </main>
 
-    <!-- 8. Rodapé (ATUALIZADO) -->
+    <!-- Rodapé -->
     <footer>
         <div class="footer-content container">
-            <!-- LOGO ATUALIZADA NO RODAPÉ -->
             <img src="https://github.com/EcossistemaLive/Dashboard_goianita/blob/main/Logo%20Live-26.png?raw=true" alt="Logo Ecossistema Live" class="footer-logo">
             <p>Ecossistema Live | Projeto Autocare</p>
             <p>&copy; 2025 Todos os direitos reservados.</p>
@@ -683,7 +624,6 @@
     </footer>
 
     <script>
-        /* --- Script para Animação Fade-in (Guia de Estilo) --- */
         document.addEventListener('DOMContentLoaded', () => {
             const fadeInElements = document.querySelectorAll('.fade-in');
 
@@ -701,23 +641,19 @@
                     observer.observe(el);
                 });
             } else {
-                // Fallback para navegadores antigos
                 fadeInElements.forEach(el => {
                     el.classList.add('is-visible');
                 });
             }
 
-            // ATUALIZAÇÃO: Garantir que a primeira aba esteja visível no carregamento
-            // (Se o 'active' já estiver no HTML, isso é uma redundância segura)
             document.querySelector('.tab-content.active').style.display = 'block';
         });
 
-        /* --- Script para Abas (Tabs) --- */
         function openTab(event, tabName) {
             let tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) {
                 tabContents[i].classList.remove("active");
-                tabContents[i].style.display = 'none'; // Garante que todos estão ocultos
+                tabContents[i].style.display = 'none';
             }
             
             let tabButtons = document.getElementsByClassName("tab-button");
@@ -726,7 +662,7 @@
             }
             
             document.getElementById(tabName).classList.add("active");
-            document.getElementById(tabName).style.display = 'block'; // Mostra o ativo
+            document.getElementById(tabName).style.display = 'block';
             event.currentTarget.classList.add("active");
         }
     </script>
