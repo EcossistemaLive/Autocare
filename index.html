@@ -312,6 +312,7 @@
             border-radius: 12px;
             transition: all 0.3s ease;
         }
+
         .timeline-content:hover {
             border-color: var(--accent-color);
         }
@@ -417,6 +418,7 @@
 
         .task-list li.icon-planilha::before { content: '📊'; }
         .task-list li.icon-acao::before { content: '⚡'; }
+        .task-list li.icon-pendente::before { content: '⏳'; }
 
         .task-list.no-icon li { padding-left: 1.5rem; }
         .task-list.no-icon li::before { content: none; }
@@ -452,15 +454,18 @@
                     <p>Projeto de Lançamento (Pneucar)</p>
                 </div>
             </a>
+            <div style="color: var(--text-subtle); font-size: 0.8rem; text-align: right;">
+                <p style="margin:0;">Última atualização:</p>
+                <p style="margin:0; color: var(--accent-color); font-weight: 600;">03 de Dezembro de 2025</p>
+            </div>
         </div>
     </header>
 
     <main>
-
         <!-- 2. Seção Hero e Status do Projeto -->
         <section id="hero" class="container">
             <div class="card card-diagnostico fade-in">
-                <h2>Status Report (25/11/2025)</h2>
+                <h2>Status Report (03/12/2025)</h2>
                 <p>
                     <strong>Diagnóstico:</strong> Crise de mão de obra iminente (saída da equipe atual na próxima semana) e alto custo para contratação tradicional.
                 </p>
@@ -550,14 +555,14 @@
             <h2 class="section-title fade-in">Painel de Ação (Marcell)</h2>
             <div class="card fade-in">
                 <p style="font-size: 1.1rem; color: var(--text-muted); text-align: center; margin-bottom: var(--space-md);">
-                    Marcell, reorganizamos suas prioridades. A aba <strong>"A. Escola Pneucar"</strong> contém a estrutura do curso baseada na descrição de vaga.
+                    Marcell, atualizamos o painel com as informações extraídas dos seus áudios recentes.
                 </p>
 
                 <div class="tab-buttons">
                     <button class="tab-button active" onclick="openTab(event, 'tab-escola')">A. Escola Pneucar</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-estrategia')">B. Estratégia</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-processos')">C. Processos</button>
-                    <button class="tab-button" onclick="openTab(event, 'tab-rh')">D. RH (Estrutura)</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-rh')">D. RH (Pendências)</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-melhoria')">E. Melhoria</button>
                 </div>
 
@@ -575,28 +580,41 @@
                 </div>
 
                 <div id="tab-estrategia" class="tab-content">
-                    <h3>B. Modelagem e Estratégia (Áudios)</h3>
+                    <h3>B. Modelagem e Estratégia (Definido)</h3>
                     <ul class="task-list">
-                        <li>Qual é a sua "Visão de Futuro" para a Autocare?</li>
-                        <li>Quem é o cliente ideal (Segmento de Clientes)?</li>
-                        <li>Qual o "problema" principal que a Autocare resolve?</li>
+                        <li class="icon-planilha">
+                            <strong>Visão de Futuro:</strong> Consolidação da marca pela confiabilidade. Foco em processo sistêmico robusto que desonera o técnico e a gestão.
+                        </li>
+                        <li class="icon-planilha">
+                            <strong>Cliente Ideal:</strong> Aquele que busca manter o veículo em dia com custos controlados. Modelo de "seguro fracionado" para manutenção preventiva constante.
+                        </li>
+                        <li class="icon-planilha">
+                            <strong>Problema Solucionado:</strong> Estabilização do desequilíbrio financeiro do usuário com manutenção. Solução: Custo baixo na preventiva + Acesso à estrutura ("Simbiose Oficina-Cliente").
+                        </li>
                     </ul>
                 </div>
 
                 <div id="tab-processos" class="tab-content">
-                    <h3>C. Mapeamento de Processos "As-Is" (Áudios)</h3>
+                    <h3>C. Mapeamento de Processos "As-Is" (Definido)</h3>
                     <ul class="task-list">
-                        <li>Detalhar a Jornada do Cliente (passo a passo).</li>
-                        <li>Descrever as Rotinas do(s) Mecânico(s).</li>
-                        <li>Listar o Portfólio de Serviços atual.</li>
+                        <li class="icon-planilha">
+                            <strong>Jornada do Cliente:</strong> Captação (Social/Parcerias) ➔ Agendamento via Tel. Específico ➔ Inspeção Veicular ➔ Pré-inscrição ➔ Avaliação Técnica (Elegibilidade) ➔ Validação Contratual.
+                        </li>
+                        <li class="icon-planilha">
+                            <strong>Rotinas do Mecânico:</strong> Orientada por plano preventivo. Inicia com conversa consultiva com cliente + Apontamentos básicos para verificar elegibilidade ao programa.
+                        </li>
+                        <li class="icon-planilha">
+                            <strong>Portfólio de Serviços:</strong> Alinhamento, balanceamento, freios, suspensão, injeção, ignição, motores, metrologia, ar condicionado (higienização/manutenção), embreagem, transmissão automática e elétrica/eletrônica.
+                        </li>
                     </ul>
                 </div>
                 
                 <div id="tab-rh" class="tab-content">
-                    <h3>D. Estrutura Organizacional (Áudios)</h3>
+                    <h3>D. Estrutura Organizacional (Pendências)</h3>
+                    <p style="color: #ff4444; font-weight: 500;">⚠️ Informações não localizadas nos áudios enviados.</p>
                     <ul class="task-list">
-                        <li>Descrever a estrutura atual (quem é quem).</li>
-                        <li>Detalhar as funções de cada membro da equipe.</li>
+                        <li class="icon-pendente"><strong>PENDENTE:</strong> Descrever a estrutura atual (Organograma: quem é quem na oficina hoje).</li>
+                        <li class="icon-pendente"><strong>PENDENTE:</strong> Detalhar as funções/atividades diárias de cada membro atual da equipe operacional.</li>
                     </ul>
                 </div>
 
@@ -611,7 +629,6 @@
 
             </div>
         </section>
-
     </main>
 
     <!-- Rodapé -->
@@ -666,6 +683,5 @@
             event.currentTarget.classList.add("active");
         }
     </script>
-
 </body>
 </html>
