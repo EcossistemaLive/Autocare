@@ -253,6 +253,9 @@
             .grid-3 {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* --- 4. Componentes --- */
@@ -582,6 +585,7 @@
         .badge-phase2 { background: rgba(59, 130, 246, 0.1); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
         .badge-60 { background: rgba(20, 184, 166, 0.1); color: #5eead4; border-color: rgba(20, 184, 166, 0.3); }
         .badge-future { background: rgba(168, 85, 247, 0.1); color: #d8b4fe; border-color: rgba(168, 85, 247, 0.3); }
+        .badge-done { background: rgba(0, 232, 0, 0.2); color: #00e800; border-color: rgba(0, 232, 0, 0.5); }
     </style>
 </head>
 <body>
@@ -605,7 +609,7 @@
             </a>
             <div style="color: var(--text-subtle); font-size: 0.8rem; text-align: right;">
                 <p style="margin:0;">Última atualização:</p>
-                <p style="margin:0; color: var(--accent-color); font-weight: 600;">08 de Janeiro de 2026</p>
+                <p style="margin:0; color: var(--accent-color); font-weight: 600;">06 de Fevereiro de 2026</p>
             </div>
         </div>
     </header>
@@ -707,6 +711,7 @@
 
                 <div class="tab-buttons">
                     <button class="tab-button active" onclick="openTab(event, 'tab-escola')">A. Escola Pneucar</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-onboarding')">H. Onboarding (Novo)</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-estrategia')">B. Estratégia</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-processos')">C. Processos</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-rh')">D. RH (Pendências)</button>
@@ -724,6 +729,43 @@
                         <li class="icon-acao"><strong>Módulo 2: Manutenção Preventiva (Mês 1)</strong><br>Troca de óleo, filtros, revisão básica. Alunos começam a auxiliar imediatamente.</li>
                         <li class="icon-acao"><strong>Módulo 3: Ferramental & Metrologia (Mês 2)</strong><br>Manuseio de ferramentas de ajuste fino e noções de informática básica.</li>
                         <li class="icon-acao"><strong>Módulo 4: Diagnóstico Avançado (Mês 3-4)</strong><br>Uso de Scanner, Osciloscópio (diferencial) e Teste de Rodagem.</li>
+                    </ul>
+                </div>
+
+                <!-- Nova Aba Onboarding -->
+                <div id="tab-onboarding" class="tab-content">
+                    <h3 style="margin-bottom: 1.5rem;">H. Onboarding Operacional (Rotina Matinal)</h3>
+                    
+                    <div class="grid grid-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div>
+                            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">1. Chegada e Organização</h4>
+                            <ul class="task-list">
+                                <li class="icon-acao"><strong>07:30 - Vestiário:</strong> Colocar objetos pessoais no armário já definido na entrada.</li>
+                                <li class="icon-planilha"><strong>Checklist Visual:</strong> Conferir a planilha fixada na entrada do vestiário para saber a atividade do dia (para não gerar sobrecarga).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">2. Limpeza e Conservação (Diário)</h4>
+                            <ul class="task-list no-icon">
+                                <li>🚽 Limpeza dos Banheiros</li>
+                                <li>🗑️ Recolhimento de lixo das lixeiras</li>
+                                <li>☕ Limpeza da Cozinha</li>
+                                <li>🧹 Varrição do Pátio (Atividade Comum a todos)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 style="color: var(--accent-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">3. Regra do Café e Início</h4>
+                    <div class="card" style="border-left: 4px solid var(--accent-color); padding: 1.5rem; background: rgba(0, 232, 0, 0.05);">
+                        <p><strong>Pausa para Café/Lanche:</strong> Duração máxima de <strong>10 minutos</strong>.</p>
+                        <p><strong>Flexibilidade:</strong> O colaborador pode optar por lanchar antes ou depois da limpeza, desde que respeite o limite de 10 minutos.</p>
+                        <p style="margin-bottom: 0;"><strong>Após o Café:</strong> Início imediato das atividades técnicas e operacionais do dia.</p>
+                    </div>
+
+                    <h4 style="color: var(--accent-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">4. Manutenções Periódicas</h4>
+                    <ul class="task-list">
+                        <li class="icon-pendente"><strong>Semanal:</strong> Limpeza e reparo de equipamentos (conforme descrito na planilha da entrada).</li>
+                        <li class="icon-pendente"><strong>Quinzenal:</strong> Limpeza pesada geral.</li>
                     </ul>
                 </div>
 
@@ -836,12 +878,12 @@
                     </div>
                     <div>
                         <h2 class="text-2xl font-bold kinetic-title tracking-tight m-0 leading-tight">Planejamento Pneucar 60 dias</h2>
-                        <p class="text-xs text-gray-400 font-medium tracking-wide m-0">PNEUCAR & AUTOCARE • V6.0</p>
+                        <p class="text-xs text-gray-400 font-medium tracking-wide m-0">PNEUCAR & AUTOCARE • V7.0</p>
                     </div>
                 </div>
                 <div class="hidden md:flex flex-col items-end text-right">
                     <span class="text-[10px] uppercase tracking-widest text-live-accent font-bold mb-1">Status: Vigente</span>
-                    <span class="text-xs text-gray-500 font-mono">Jan/2026 • Rev. 06</span>
+                    <span class="text-xs text-gray-500 font-mono">Fev/2026 • Rev. 07</span>
                 </div>
             </div>
 
@@ -864,15 +906,16 @@
                             <!-- IMEDIATO & INICIADOS -->
                             <tr class="group" data-project="Pneucar">
                                 <td class="px-6 py-5">
-                                    <span class="badge badge-fire">
-                                        <i data-lucide="flame" class="w-3 h-3 mr-1.5"></i> Imediato
+                                    <!-- STATUS ATUALIZADO AQUI -->
+                                    <span class="badge badge-started">
+                                        <i data-lucide="play-circle" class="w-3 h-3 mr-1.5"></i> Iniciado
                                     </span>
                                 </td>
                                 <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
                                 <td class="px-6 py-5 text-gray-400">Processos</td>
                                 <td class="px-6 py-5 font-medium text-white">Map. Onboarding</td>
-                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Gravação de áudios detalhando fluxo desde entrevista até "Dia 1".</td>
-                                <td class="px-6 py-5"><span class="text-white">Marcel / Cléber</span></td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Definido fluxo de vestiário, limpeza, café (10min) e início.</td>
+                                <td class="px-6 py-5"><span class="text-white">Marcell / Cléber</span></td>
                             </tr>
 
                             <tr class="group" data-project="Pneucar">
@@ -1034,7 +1077,7 @@
         <div class="footer-content container">
             <img src="https://github.com/EcossistemaLive/Dashboard_goianita/blob/main/Logo%20Live-26.png?raw=true" alt="Logo Ecossistema Live" class="footer-logo">
             <p>Ecossistema Live | Projeto Autocare</p>
-            <p>&copy; 2025 Todos os direitos reservados.</p>
+            <p>&copy; 2026 Todos os direitos reservados.</p>
         </div>
     </footer>
 
