@@ -9,32 +9,77 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts Adicionais para o Quadro de Planejamento (Tailwind & Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false, // Desabilita o reset global para não quebrar o layout existente
+            },
+            theme: {
+                extend: {
+                    colors: {
+                        live: {
+                            deep: '#06192a',
+                            glass: 'rgba(10, 36, 61, 0.70)',
+                            glassHover: 'rgba(15, 45, 75, 0.85)',
+                            accent: '#00e800',
+                            accentDim: 'rgba(0, 232, 0, 0.15)',
+                            border: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        /* --- 1. Núcleo da Identidade Visual (Tokens) --- */
+        /* --- 1. Núcleo da Identidade Visual (Tokens Originais) --- */
         :root {
             /* Paleta Principal */
-            --primary-bg: #06192a;      /* Azul Petróleo - Fundo principal */
-            --card-bg: #0A243D;         /* Azul Escuro - Fundo de cards */
-            --accent-color: #00e800;     /* Verde Vibrante - Destaques, links, títulos */
-
+            --primary-bg: #06192a;   /* Azul Petróleo - Fundo principal */
+            --card-bg: #0A243D;      /* Azul Escuro - Fundo de cards */
+            --accent-color: #00e800; /* Verde Vibrante - Destaques, links, títulos */
+            
             /* Textos */
-            --text-primary: #ffffff;     /* Branco - Textos principais */
-            --text-muted: #cccccc;       /* Cinza Claro */
-            --text-subtle: #a0a0a0;       /* Cinza - Textos secundários e parágrafos */
-
+            --text-primary: #ffffff; /* Branco - Textos principais */
+            --text-muted: #cccccc;   /* Cinza Claro */
+            --text-subtle: #a0a0a0;  /* Cinza - Textos secundários e parágrafos */
+            
             /* Bordas e Efeitos */
             --border-color: rgba(255, 255, 255, 0.1);
             --accent-glow: 0 0 12px rgba(0, 232, 0, 0.7); /* Sombra para o verde vibrante */
-
+            
             /* Tipografia */
             --font-primary: 'Poppins', sans-serif;
             --font-secondary: 'Merriweather', serif;
-
+            
             /* Espaçamento */
             --space-sm: 1rem;   /* 16px */
             --space-md: 2rem;   /* 32px */
             --space-lg: 4rem;   /* 64px */
+
+            /* Variáveis Extras do Novo Quadro */
+            --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-fluid: cubic-bezier(0.4, 0.0, 0.2, 1);
+            --glass-blur: blur(16px) saturate(180%);
+            --flashlight-x: 50%;
+            --flashlight-y: 50%;
         }
 
         /* --- 2. Estilos Globais e Textura de Fundo --- */
@@ -52,7 +97,7 @@
             font-family: var(--font-primary);
             background-color: var(--primary-bg);
             /* Textura de Fundo (Guia de Estilo) */
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
             background-attachment: fixed;
             color: var(--text-subtle);
             line-height: 1.7;
@@ -69,6 +114,7 @@
         h1 { font-size: clamp(2.5rem, 5vw, 3rem); }
         h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
         h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
 
         p {
             margin-bottom: var(--space-sm);
@@ -97,7 +143,7 @@
             padding-bottom: var(--space-lg);
         }
 
-        header {
+        header.main-header {
             position: fixed;
             top: 0;
             left: 0;
@@ -149,7 +195,7 @@
         section {
             border-bottom: 1px solid var(--border-color);
         }
-
+        
         section:last-of-type {
             border-bottom: none;
         }
@@ -210,7 +256,6 @@
         }
 
         /* --- 4. Componentes --- */
-
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -237,13 +282,13 @@
             background: linear-gradient(145deg, var(--card-bg), #082036);
             box-shadow: var(--accent-glow);
         }
-        
+
         .card-diagnostico h2 {
             font-family: var(--font-secondary);
             color: var(--accent-color);
             font-size: 1.8rem;
         }
-        
+
         .card-diagnostico p {
             font-size: 1.1rem;
             color: var(--text-muted);
@@ -300,7 +345,7 @@
             left: 50%;
             padding-left: 40px;
         }
-        
+
         .timeline-item:nth-child(even)::after {
             left: -10px;
         }
@@ -320,7 +365,7 @@
         .timeline-content h3 {
             color: var(--accent-color);
         }
-        
+
         .timeline-content .tag {
             display: inline-block;
             background-color: var(--accent-color);
@@ -331,7 +376,7 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
-
+        
         /* Botão de Link dentro da Timeline */
         .btn-link {
             display: inline-block;
@@ -344,7 +389,7 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
-        
+
         .btn-link:hover {
             background-color: var(--accent-color);
             color: var(--primary-bg);
@@ -352,11 +397,30 @@
         }
 
         @media (max-width: 768px) {
-            .timeline-container::after { left: 20px; }
-            .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; text-align: left; }
-            .timeline-item:nth-child(odd) { left: 0; text-align: left; }
-            .timeline-item:nth-child(even) { left: 0; padding-left: 50px; }
-            .timeline-item::after, .timeline-item:nth-child(even)::after { left: 10px; }
+            .timeline-container::after {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 10px;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 50px;
+            }
+            
+            .timeline-item::after, .timeline-item:nth-child(even)::after {
+                left: 10px;
+            }
         }
 
         /* Abas (Tabs) */
@@ -379,18 +443,28 @@
             transition: all 0.3s ease;
         }
 
-        .tab-button:hover { color: var(--text-primary); }
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
 
         .tab-button.active {
             color: var(--accent-color);
             border-bottom-color: var(--accent-color);
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
 
         /* Lista de tarefas */
-        .task-list { list-style: none; padding-left: 0; }
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
 
         .task-list li {
             position: relative;
@@ -419,9 +493,13 @@
         .task-list li.icon-planilha::before { content: '📊'; }
         .task-list li.icon-acao::before { content: '⚡'; }
         .task-list li.icon-pendente::before { content: '⏳'; }
-
-        .task-list.no-icon li { padding-left: 1.5rem; }
-        .task-list.no-icon li::before { content: none; }
+        
+        .task-list.no-icon li {
+            padding-left: 1.5rem;
+        }
+        .task-list.no-icon li::before {
+            content: none;
+        }
 
         /* Animação Fade-in */
         .fade-in {
@@ -435,19 +513,90 @@
             transform: translateY(0);
         }
 
+        /* --- ESTILOS ESPECÍFICOS DO QUADRO DE PLANEJAMENTO (Adicionados) --- */
+        
+        /* Flashlight Effect */
+        .flashlight-layer {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(
+                600px circle at var(--flashlight-x) var(--flashlight-y), 
+                rgba(0, 232, 0, 0.06), 
+                transparent 40%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Kinetic Title */
+        .kinetic-title {
+            background: linear-gradient(90deg, #ffffff 0%, #cccccc 50%, #00e800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Glass Panel */
+        .glass-panel {
+            background: var(--live-glass, rgba(10, 36, 61, 0.70));
+            background: linear-gradient(135deg, rgba(10, 36, 61, 0.6), rgba(6, 25, 42, 0.8));
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s var(--spring-bounce), box-shadow 0.4s var(--ease-fluid), border-color 0.3s;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 232, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 232, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbars Customizados */
+        .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0, 232, 0, 0.5); }
+
+        /* Table Specifics */
+        .glass-panel tr { transition: background-color 0.2s ease; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-panel tr:hover td { background-color: rgba(0, 232, 0, 0.03); }
+        
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+            backdrop-filter: blur(4px);
+        }
+        .badge-fire { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.3); }
+        .badge-started { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
+        .badge-phase1 { background: rgba(249, 115, 22, 0.1); color: #fdba74; border-color: rgba(249, 115, 22, 0.3); }
+        .badge-phase2 { background: rgba(59, 130, 246, 0.1); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
+        .badge-60 { background: rgba(20, 184, 166, 0.1); color: #5eead4; border-color: rgba(20, 184, 166, 0.3); }
+        .badge-future { background: rgba(168, 85, 247, 0.1); color: #d8b4fe; border-color: rgba(168, 85, 247, 0.3); }
     </style>
 </head>
 <body>
 
+    <!-- Atmospheric Layers -->
+    <div class="flashlight-layer" id="flashlight"></div>
+
     <!-- 1. Cabeçalho Fixo -->
-    <header>
+    <header class="main-header">
         <div class="header-content">
             <a href="#hero" class="logo-container" aria-label="Voltar ao topo">
-                <img 
-                    src="https://github.com/EcossistemaLive/Dashboard_goianita/blob/main/Logo%20Live-26.png?raw=true" 
-                    alt="Logo Autocare" 
-                    class="logo-img"
-                    onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/EcossistemaLive/live-template/master/Logo%20Live-26.png';"
+                <img src="https://github.com/EcossistemaLive/Dashboard_goianita/blob/main/Logo%20Live-26.png?raw=true" 
+                     alt="Logo Autocare" 
+                     class="logo-img"
+                     onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/EcossistemaLive/live-template/master/Logo%20Live-26.png';"
                 >
                 <div class="logo-text">
                     <h1>Autocare</h1>
@@ -456,7 +605,7 @@
             </a>
             <div style="color: var(--text-subtle); font-size: 0.8rem; text-align: right;">
                 <p style="margin:0;">Última atualização:</p>
-                <p style="margin:0; color: var(--accent-color); font-weight: 600;">03 de Dezembro de 2025</p>
+                <p style="margin:0; color: var(--accent-color); font-weight: 600;">08 de Janeiro de 2026</p>
             </div>
         </div>
     </header>
@@ -465,7 +614,7 @@
         <!-- 2. Seção Hero e Status do Projeto -->
         <section id="hero" class="container">
             <div class="card card-diagnostico fade-in">
-                <h2>Status Report (03/12/2025)</h2>
+                <h2>Status Report (12/12/2025)</h2>
                 <p>
                     <strong>Diagnóstico:</strong> Crise de mão de obra iminente (saída da equipe atual na próxima semana) e alto custo para contratação tradicional.
                 </p>
@@ -500,7 +649,6 @@
         <!-- 4. Seção Plano de Ação (Timeline) -->
         <section id="plano-acao" class="container">
             <h2 class="section-title fade-in">Plano de Ação Atualizado (Nov 25 - Mar 26)</h2>
-
             <div class="timeline-container">
                 <!-- ATUALIZAÇÃO: Fase 1.5 Adicionada -->
                 <div class="timeline-item fade-in">
@@ -512,7 +660,6 @@
                         <a href="https://escolapneucar.netlify.app/" target="_blank" class="btn-link">Visualizar Landing Page da Escola 🔗</a>
                     </div>
                 </div>
-
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
                         <span class="tag">Fase 1 (Em Paralelo)</span>
@@ -520,7 +667,6 @@
                         <p><strong>Entregáveis:</strong> Questionário de Processos (Marcell) ➔ Levantamento de Custos para aprovação do Budget.</p>
                     </div>
                 </div>
-
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
                         <span class="tag">Fase 2 (Dez 25)</span>
@@ -553,6 +699,7 @@
         <!-- 6. Seção Checklist Marcell (O Questionário) -->
         <section id="checklist-marcell" class="container">
             <h2 class="section-title fade-in">Painel de Ação (Marcell)</h2>
+            
             <div class="card fade-in">
                 <p style="font-size: 1.1rem; color: var(--text-muted); text-align: center; margin-bottom: var(--space-md);">
                     Marcell, atualizamos o painel com as informações extraídas dos seus áudios recentes.
@@ -564,10 +711,11 @@
                     <button class="tab-button" onclick="openTab(event, 'tab-processos')">C. Processos</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-rh')">D. RH (Pendências)</button>
                     <button class="tab-button" onclick="openTab(event, 'tab-melhoria')">E. Melhoria</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-reuniao')">F. Reunião (17/12)</button>
+                    <button class="tab-button" onclick="openTab(event, 'tab-premiacao')">G. Premiação</button>
                 </div>
 
                 <!-- Conteúdo das Abas -->
-                
                 <div id="tab-escola" class="tab-content active">
                     <h3>A. Estrutura do Curso (Módulos Baseados na Vaga)</h3>
                     <p>Transformamos os requisitos da sua vaga na "Ementa do Curso".</p>
@@ -608,7 +756,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div id="tab-rh" class="tab-content">
                     <h3>D. Estrutura Organizacional (Pendências)</h3>
                     <p style="color: #ff4444; font-weight: 500;">⚠️ Informações não localizadas nos áudios enviados.</p>
@@ -626,9 +774,259 @@
                         <li>(Ação) Definir responsável interno pelo "Programa 5S" (aluno destaque).</li>
                     </ul>
                 </div>
+                
+                <div id="tab-reuniao" class="tab-content">
+                    <h3>F. Resumo da Reunião (17/12/2025)</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); text-align: center; margin-bottom: var(--space-md);">
+                        Detalhamento da discussão e dos itens de ação definidos na reunião de 17 de Dezembro de 2025.
+                    </p>
+                    
+                    <h4>Resumo Executivo</h4>
+                    <p>
+                        Durante esta reunião, Cléber, Marcell, Luiz e Ester discutiram a dificuldade em contratar mecânicos qualificados, opções de recrutamento (agências externas, anúncios direcionados, WhatsApp/Instagram, parcerias Senai), a criação de um curso/aprendizagem com taxa reduzida e bônus baseados em produtividade, e a definição de um modelo de emprego com salário base em carteira + premiação por produtividade. Acordaram em prosseguir com o recrutamento direcionado e refinar os detalhes da contratação e do curso.
+                    </p>
 
+                    <h4>Itens de Ação: Cléber</h4>
+                    <ul class="task-list">
+                        <li class="icon-pendente">Refinar e documentar a divulgação da vaga (texto com salário-base, premiação por produtividade e endereço da empresa) para uso em grupos, Instagram e WhatsApp, e enviar para Ester até 2026-01-05.</li>
+                        <li class="icon-pendente">Enviar à Ester o link e a proposta finalizada da página do curso e postagens sugeridas (feed, story, grupos) até 2026-01-05.</li>
+                        <li class="icon-pendente">Encaminhar à Ester os contatos e detalhes da parceria que eles discutiram (pacote de publicação e grupos) e confirmar a duração/alcance da veiculação.</li>
+                    </ul>
+
+                    <h4>Itens de Ação: Marcell (Marcelo)</h4>
+                    <ul class="task-list">
+                        <li class="icon-pendente">Definir e confirmar com o pai os parâmetros de remuneração: salário-base a constar em carteira e percentual de premiação por produtividade (ex.: 10–15% do total de mão de obra) e enviar a Ester até 2025-12-30.</li>
+                        <li class="icon-pendente">Organizar o plano de experiência (90 dias) e o roteiro de avaliação (metas, critérios de pontualidade, assiduidade, conservação do trabalho) e compartilhar com Ester para uso nas entrevistas até 2026-01-07.</li>
+                        <li class="icon-pendente">Disponibilizar informações sobre a empresa (endereço, fotos/descrição do ambiente, benefícios) para inclusão no anúncio e para as entrevistas presenciais até 2025-12-30.</li>
+                    </ul>
+
+                    <h4>Itens de Ação: Luiz</h4>
+                    <ul class="task-list">
+                        <li class="icon-pendente">Apoiar no ajuste do formato do curso: proposta de preço reduzido, garantia (por exemplo, presença mínima de 75%) e proposta de premiação por certificação; enviar sugestão ao grupo até 2026-01-10.</li>
+                        <li class="icon-pendente">Ajudar a planejar conteúdo/recursos para gravação de aulas na oficina (estúdio/estrutura) caso necessário, e levantar custos e cronograma até 2026-01-10.</li>
+                    </ul>
+                    
+                    <h4>Itens de Ação: Ester</h4>
+                    <ul class="task-list">
+                        <li class="icon-pendente">Enviar proposta formal de recrutamento (modelo de cobrança, prazos, número estimado de candidatos, política de substituição/garantia) ao Kleber para ajuste e aprovação até 2025-12-27.</li>
+                        <li class="icon-pendente">Iniciar a divulgação da vaga após receber texto final e critérios (fornecidos por Cléber e Marcell) e trazer os primeiros candidatos para entrevistas presenciais em janeiro de 2026; enviar primeiro lote de candidatos até 2026-01-15.</li>
+                        <li class="icon-pendente">Sugere metodologia de triagem e um modelo de entrevista que explique claramente salário-base, premiação por produtividade e expectativas (meta média), e entregar esse roteiro até 2026-01-08.</li>
+                    </ul>
+                </div>
+
+                <div id="tab-premiacao" class="tab-content">
+                    <h3>G. Estrutura de Premiação (Mecânico)</h3>
+                    <iframe 
+                        src="https://ecossistemalive.github.io/premiacao_mecanico/" 
+                        style="width: 100%; height: 80vh; border: none; display: block; margin: 0 auto;"
+                        title="Estrutura de Premiação"
+                    ></iframe>
+                </div>
             </div>
         </section>
+
+        <!-- 7. Seção NOVO: Planejamento 60 Dias (Integrated) -->
+        <section id="planejamento-60" class="container">
+            
+            <!-- Header Específico do Quadro -->
+            <div class="flex justify-between items-center mb-6 border-b border-live-border pb-4 fade-in">
+                <div class="flex items-center gap-4 group cursor-default">
+                    <div class="relative w-10 h-10 flex items-center justify-center rounded-lg bg-live-deep border border-live-accent/30 shadow-[0_0_15px_rgba(0,232,0,0.15)] group-hover:shadow-[0_0_25px_rgba(0,232,0,0.3)] transition-all duration-500">
+                        <i data-lucide="activity" class="text-live-accent w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold kinetic-title tracking-tight m-0 leading-tight">Planejamento Pneucar 60 dias</h2>
+                        <p class="text-xs text-gray-400 font-medium tracking-wide m-0">PNEUCAR & AUTOCARE • V6.0</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex flex-col items-end text-right">
+                    <span class="text-[10px] uppercase tracking-widest text-live-accent font-bold mb-1">Status: Vigente</span>
+                    <span class="text-xs text-gray-500 font-mono">Jan/2026 • Rev. 06</span>
+                </div>
+            </div>
+
+            <!-- Data Grid (Glass Panel) -->
+            <div class="glass-panel rounded-2xl overflow-hidden border-t border-t-white/5 fade-in">
+                <div class="overflow-x-auto custom-scroll">
+                    <table class="w-full text-left border-collapse" id="planningTable">
+                        <thead>
+                            <tr class="bg-black/20 text-xs uppercase tracking-wider text-gray-400 font-bold border-b border-white/5">
+                                <th class="px-6 py-5">Status / Prazo</th>
+                                <th class="px-6 py-5">Projeto</th>
+                                <th class="px-6 py-5">Setor</th>
+                                <th class="px-6 py-5 w-1/4">Atividade Core</th>
+                                <th class="px-6 py-5 w-1/3">Execução Tática</th>
+                                <th class="px-6 py-5">Responsável</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-gray-300 divide-y divide-white/5" id="tableBody">
+                            
+                            <!-- IMEDIATO & INICIADOS -->
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-fire">
+                                        <i data-lucide="flame" class="w-3 h-3 mr-1.5"></i> Imediato
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">Processos</td>
+                                <td class="px-6 py-5 font-medium text-white">Map. Onboarding</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Gravação de áudios detalhando fluxo desde entrevista até "Dia 1".</td>
+                                <td class="px-6 py-5"><span class="text-white">Marcel / Cléber</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-started">
+                                        <i data-lucide="play-circle" class="w-3 h-3 mr-1.5"></i> Iniciado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">RH & Talentos</td>
+                                <td class="px-6 py-5 font-medium text-white">Seleção de Mecânicos</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Preenchimento de 2 vagas (mínimo 1) via Esther RH.</td>
+                                <td class="px-6 py-5"><span class="text-live-accent">Esther (RH)</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-fire">
+                                        <i data-lucide="flame" class="w-3 h-3 mr-1.5"></i> Imediato
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">Treinamento</td>
+                                <td class="px-6 py-5 font-medium text-white">Lançamento do Curso</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Teste A/B: Venda (R$ 500) vs Bolsa. Investimento inicial R$ 650.</td>
+                                <td class="px-6 py-5"><span class="text-white">Consultoria + Tráfego</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Autocare">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-fire">
+                                        <i data-lucide="flame" class="w-3 h-3 mr-1.5"></i> Imediato
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Autocare</td>
+                                <td class="px-6 py-5 text-gray-400">Jurídico & Marca</td>
+                                <td class="px-6 py-5 font-medium text-white">Viabilidade e Subsídio</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Verificar INPI e entrada no Sebrae (CNPJ Simples) para custeio.</td>
+                                <td class="px-6 py-5"><span class="text-white">Consultoria</span></td>
+                            </tr>
+
+                            <!-- FASE 1 -->
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-phase1">Fase 1</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">Tecnologia & IA</td>
+                                <td class="px-6 py-5 font-medium text-white">Absorção na IA</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Inserir processos mapeados do Luis Carlos na base de conhecimento.</td>
+                                <td class="px-6 py-5"><span class="text-purple-400">IA Pneucar</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-phase1">Fase 1</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">Gestão à Vista</td>
+                                <td class="px-6 py-5 font-medium text-white">Cronograma Semanal</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Criação de quadro físico A1 com rotina diária da oficina.</td>
+                                <td class="px-6 py-5"><span class="text-gray-500 italic">Murilo (Contratar)</span></td>
+                            </tr>
+
+                            <!-- CURTO PRAZO / FASE 2 -->
+                            <tr class="group" data-project="Autocare">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-phase1">Curto Prazo</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Autocare</td>
+                                <td class="px-6 py-5 text-gray-400">Branding</td>
+                                <td class="px-6 py-5 font-medium text-white">Identidade Visual</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Criação de logo e assets via subsídio (Custo aprox. R$ 3.800).</td>
+                                <td class="px-6 py-5"><span class="text-white">Fábio (Oolt)</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-phase2">Fase 2</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">Customer Exp.</td>
+                                <td class="px-6 py-5 font-medium text-white">Sinalização Interna</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Sinalização visual de ambientes para leigos (banheiros, baias).</td>
+                                <td class="px-6 py-5"><span class="text-white">Murilo</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Pneucar">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-phase2">Fase 2</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Pneucar</td>
+                                <td class="px-6 py-5 text-gray-400">Qualidade</td>
+                                <td class="px-6 py-5 font-medium text-white">Implantação 5S</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Organização profunda de áreas visíveis e não visíveis.</td>
+                                <td class="px-6 py-5"><span class="text-white">Equipe Interna</span></td>
+                            </tr>
+
+                            <!-- 60 DIAS -->
+                            <tr class="group" data-project="Autocare">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-60">60 Dias</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Autocare</td>
+                                <td class="px-6 py-5 text-gray-400">Estratégia</td>
+                                <td class="px-6 py-5 font-medium text-white">Revisão Modelo</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Definição de nichos (mulheres, idosos), canais e recursos.</td>
+                                <td class="px-6 py-5"><span class="text-white">Cléber e Sócios</span></td>
+                            </tr>
+
+                            <tr class="group" data-project="Autocare">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-60">60 Dias</span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Autocare</td>
+                                <td class="px-6 py-5 text-gray-400">Comercial</td>
+                                <td class="px-6 py-5 font-medium text-white">Map. Parceiros</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Associações de Proteção Veicular e Corretores para escala.</td>
+                                <td class="px-6 py-5"><span class="text-white">Comercial</span></td>
+                            </tr>
+
+                             <!-- FUTURO -->
+                             <tr class="group" data-project="Autocare">
+                                <td class="px-6 py-5">
+                                    <span class="badge badge-future">
+                                        <i data-lucide="rocket" class="w-3 h-3 mr-1.5"></i> Futuro
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 font-semibold text-white">Autocare</td>
+                                <td class="px-6 py-5 text-gray-400">Expansão</td>
+                                <td class="px-6 py-5 font-medium text-white">Rede de Parceiros</td>
+                                <td class="px-6 py-5 text-gray-400 font-light leading-relaxed">Expansão via redes (ex: Rede Âncora) ou franquias após validar MVP.</td>
+                                <td class="px-6 py-5"><span class="text-live-accent">Estratégia</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Footer Routine Info -->
+                <div class="bg-black/20 border-t border-white/5 p-4 flex items-center gap-4">
+                    <div class="p-2.5 rounded-lg border border-live-accent/20 bg-live-accent/5 text-live-accent">
+                        <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-gray-200 m-0">Rotina de Controle</h3>
+                        <p class="text-xs text-gray-500 mt-0.5 m-0">
+                            Sprint Checkpoints semanais. Preferencialmente quintas-feiras.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Rodapé -->
@@ -642,8 +1040,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const fadeInElements = document.querySelectorAll('.fade-in');
+            // Inicializa Lucide Icons (Novo)
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
 
+            // Flashlight Effect Logic (Novo)
+            document.addEventListener('mousemove', (e) => {
+                const root = document.documentElement;
+                root.style.setProperty('--flashlight-x', `${e.clientX}px`);
+                root.style.setProperty('--flashlight-y', `${e.clientY}px`);
+            });
+
+            // Animação de Scroll (Original)
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
@@ -663,21 +1074,25 @@
                 });
             }
 
-            document.querySelector('.tab-content.active').style.display = 'block';
+            // Inicializa a aba padrão
+            if(document.querySelector('.tab-content.active')) {
+                document.querySelector('.tab-content.active').style.display = 'block';
+            }
         });
 
+        // Lógica das Abas (Original)
         function openTab(event, tabName) {
             let tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) {
                 tabContents[i].classList.remove("active");
                 tabContents[i].style.display = 'none';
             }
-            
+
             let tabButtons = document.getElementsByClassName("tab-button");
             for (let i = 0; i < tabButtons.length; i++) {
                 tabButtons[i].classList.remove("active");
             }
-            
+
             document.getElementById(tabName).classList.add("active");
             document.getElementById(tabName).style.display = 'block';
             event.currentTarget.classList.add("active");
